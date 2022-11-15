@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form action="/produccion/create/" method="POST" class="card card-body">
+                <h1>Crear registro de Producción</h1>
+
+                {{error}}
+                {% csrf_token %}
+
+                {{form}}
+
+                <button class="btn btn-primary mt-2">
+                    Guardar
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

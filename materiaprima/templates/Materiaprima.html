@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+    <div class="text-center">
+        <h3>Materia prima (leche)</h3>
+    </div>
+
+    <div class="row py-4">
+        <div class="col-md-6 my-auto">
+            <form action="/materiaprima/search/" class="input-group">
+                Buscar por proveedor: <input type="text" name="buspro" class="form-control">
+                    <button type="submit" class="btn btn-info">
+                        Buscar
+                    </button>
+            </form>
+        </div>
+        <div class="col-md-6 my-auto" style="text-align: right;">
+            <a href="create/" class="btn btn-outline-dark">
+                <i class="fas fa-plus-square my-auto mr-1"></i>
+                Agregar nuevo
+            </a>
+        </div>
+    </div>
+    
+    <div id="card">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Proveedor</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for materiaprima in materiaprimas %}
+            <tbody>
+                <tr>
+                    <td>{{materiaprima.cantidad}}</td>
+                    <td>{{materiaprima.proveedor}}</td>
+                    <td>{{materiaprima.fecha}}</td>
+                    <td>{{materiaprima.user.username}}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a href="{% url 'materiaprima_detail' materiaprima.id %}" class="btn btn-secondary">Seleccionar</a>
+                            </div>
+                            <div class="col-md-3">
+                                <form action="{% url 'delete_materiaprima' materiaprima.id %}" method="POST">
+                                    {% csrf_token%}
+                                    <button class="btn btn-danger">
+                                        Borrar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</main>
+
+{% endblock %}

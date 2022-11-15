@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+    <div class="text-center">
+        <h3>Inventario</h3>
+    </div>
+
+    <div class="row py-4">
+        <div class="col-md-6 my-auto">
+            <form action="/inventario/searchi/" class="input-group">
+                Buscar por categoría: <input type="text" name="businv" class="form-control">
+                <button type="submit" class="btn btn-info">
+                    Buscar
+                </button>
+            </form>
+        </div>
+        <div class="col-md-6 my-auto" style="text-align: right;">
+            <a href="/entrada/" class="btn btn-success">
+                Entradas
+            </a>
+            <a href="/salida/" class="btn btn-primary">
+                Salidas
+            </a>
+            <a href="create/" class="btn btn-outline-dark">
+                Agregar nuevo
+            </a>
+        </div>
+    </div>
+    <div class="row py-3" id="card">
+        {% for inventario in inventarios %}
+        <div class="col-md-3 py-1">
+            <div class="card text-center">
+                <div class="card-body ">
+                    <h5 class="card-title text-uppercase">{{inventario.descripcion}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{inventario.categoria}}</h6>
+                    <p class="card-text">Stock: {{inventario.stock}} <br> Entradas: {{inventario.entrada}} <br> Salidas: {{inventario.salida}}
+                        <br>
+                        Precio Unitario: {{inventario.precio_unitario}}</p>
+                    <p>{{inventario.user.username}}</p>
+                    <a href="{% url 'inventario_detail' inventario.id %}" class="btn btn-secondary">Seleccionar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+    <!-- <div id="card">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Descripcion</th>
+                    <th>Stock</th>
+                    <th>Entradas</th>
+                    <th>Salidas</th>
+                    <th>Precio Unitario</th>
+                    <th>Categoría</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for inventario in inventarios %}
+            <tbody>
+                <tr>
+                    <td>{{inventario.descripcion}}</td>
+                    <td>{{inventario.stock}}</td>
+                    <td>{{inventario.entrada}}</td>
+                    <td>{{inventario.salida}}</td>
+                    <td>{{inventario.precio_unitario}}</td>
+                    <td>{{inventario.categoria}}</td>
+                    <td>{{inventario.user.username}}</td>
+                    <td>
+                        <a href="{% url 'inventario_detail' inventario.id %}" class="btn btn-secondary">Seleccionar</a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div> -->
+</main>
+
+{% endblock %}

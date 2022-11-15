@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La presa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">Cremería La Presa</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Inicio</a>
+                </li>
+                
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/inventario/">Inventario</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/materiaprima/">Materia prima</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/produccion/">Producción</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Cerrar sesión</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/signin">Acceder</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup">Registro</a>
+                </li>
+                {% endif%}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

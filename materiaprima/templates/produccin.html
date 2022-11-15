@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="container py-5">
+    <div class="text-center">
+        <h3>Producción</h3>
+    </div>
+
+    <div class="row py-4">
+        <div class="col-md-6 my-auto">
+            <form action="/produccion/searchp/" class="input-group">
+                Buscar por fecha: <input type="text" name="busemp" class="form-control">
+                    <button type="submit" class="btn btn-info">
+                        Buscar
+                    </button>
+            </form>
+        </div>
+        <div class="col-md-6 my-auto" style="text-align: right;">
+            <a href="create/" class="btn btn-outline-dark">
+                <i class="fas fa-plus-square my-auto mr-1"></i>
+                Agregar nuevo
+            </a>
+        </div>
+    </div>
+    
+    <div id="card">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            {% for produccin in produccins %}
+            <tbody>
+                <tr>
+                    <td>{{produccin.producto}}</td>
+                    <td>{{produccin.cantidad}}</td>
+                    <td>{{produccin.fecha}}</td>
+                    <td>{{produccin.user.username}}</td>
+                    <td>
+                        <a href="{% url 'produccion_detail' produccin.id %}" class="btn btn-success">Seleccionar</a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Producción</h1>
+
+            <ul class="list-group">
+                {% for produccin in produccins %}
+                <a class="list-group-item" href="{% url 'produccion_detail' produccin.id %}">
+                    
+                        <header class="d-flex justify-content-between">
+                            <h3 class="fw-bold">{{produccin.producto}}</h1>
+                            <p>{{produccin.user.username}}</p>
+                        </header>
+                        <p>{{produccin.cantidad}}</p>
+                        <p>{{produccin.fecha}}</p>
+                        
+                    </a>
+                
+                
+                {% endfor %}
+            </ul>
+        </div>
+    </div> -->
+</main>
+
+{% endblock %}
